@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-class Student extends Person{
+public class Student extends Person{
     String studentId; // instance variable
     String name;// instance variable
     private String department;

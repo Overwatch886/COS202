@@ -6,9 +6,7 @@ use Java GUI to take input and fill in the classes.
  */
 
 package assignment1;
-import Student;
-import Course.*;
-import Person.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
