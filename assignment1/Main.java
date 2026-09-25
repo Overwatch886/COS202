@@ -20,8 +20,12 @@ public class Main {
         frame.setSize(400, 300);
         frame.setLayout(new GridLayout(4, 2, 10, 10));
         frame.setVisible(true);
+        //Storing Students
+        ArrayList<Student> studentsList = new ArrayList<>();
 
+        //
         JButton addStudentButton = new JButton("Add Student");
+        JButton viewStudents = new JButton("View Students");
         // Labels
         JLabel idInputLabel = new JLabel("Enter you Matric Number");
         JLabel nameInputLabel = new JLabel("Enter you Name ");
@@ -48,15 +52,6 @@ public class Main {
 
 
 
-        //Buttons
-
-
-
-
-
-
-
-
         addStudentButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,6 +64,7 @@ public class Main {
 
                 } else {
                     Student student = new Student(matricInput, name, department);
+                    studentsList.add(student);
                     JOptionPane.showMessageDialog(frame, "Student Added Successfully", "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
                     student.Courses.add(new Course("ENT211", "Entrepreneurship and Innovation", 2, "A1"));//{"ENT211", "COS201", "MTH201", "MTH202", "COS202"};
 
