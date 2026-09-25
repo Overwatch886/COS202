@@ -10,7 +10,7 @@ package assignment1;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
 import javax.swing.*;
 
 public class Main {
@@ -18,14 +18,17 @@ public class Main {
         JFrame frame = new JFrame("Student Registration Portal");
 
         frame.setSize(400, 300);
-        frame.setLayout(new GridLayout(4, 2, 10, 10));
-        frame.setVisible(true);
+        frame.setLayout(new BorderLayout());
+
         //Storing Students
         ArrayList<Student> studentsList = new ArrayList<>();
 
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(new GridLayout(4, 2));
+
         //
         JButton addStudentButton = new JButton("Add Student");
-        JButton viewStudents = new JButton("View Students");
+        JButton viewCourseRegistration = new JButton("View Course Registration");
         // Labels
         JLabel idInputLabel = new JLabel("Enter you Matric Number");
         JLabel nameInputLabel = new JLabel("Enter you Name ");
@@ -36,20 +39,43 @@ public class Main {
         JTextField nameInput = new JTextField(15);
         JTextField departmentInput = new JTextField(15);
 
+        // List of Students
+        DefaultListModel<Student> studentListModel = new DefaultListModel<>();
+        JList<Student> studentListView = new JList<>(studentListModel);
+        JScrollPane scrollPane = new JScrollPane(studentListView);
+        scrollPane.setPreferredSize(new Dimension(180, 0));
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Registered Students"));
         // Adding Elements to the window
         // Adding Labels and Textboxes
-        frame.add(idInputLabel);
-        frame.add(idInput);
+        formPanel.add(idInputLabel);
+        formPanel.add(idInput);
 
-        frame.add(nameInputLabel);
-        frame.add(nameInput);
+        formPanel.add(nameInputLabel);
+        formPanel.add(nameInput);
 
-        frame.add(departmentInputLabel);
-        frame.add(departmentInput);
+        formPanel.add(departmentInputLabel);
+        formPanel.add(departmentInput);
 
         // Adding Button
-        frame.add(addStudentButton);
+        formPanel.add(addStudentButton);
+        formPanel.add(viewCourseRegistration);
+        //Add Student List
+        frame.add(formPanel, BorderLayout.CENTER);
+        frame.add(scrollPane, BorderLayout.EAST);
 
+        // Creating 3 students obejcts to pre-exists in our database
+        Student israel = new Student("250398", "Israel Olawuyi", "Computer Science");
+        Student emmanuel = new Student("250559", "Sunday Emmanuel", "Mathematics");
+        Student favour = new Student("250645", "Favour Adetunji", "Physics");
+        studentsList.add(israel);
+        studentsList.add(emmanuel);
+        studentsList.add(favour);
+        studentListModel.addElement(israel);
+        studentListModel.addElement(emmanuel);
+        studentListModel.addElement(favour);
+
+
+        frame.setVisible(true);
 
 
         addStudentButton.addActionListener(new ActionListener(){
@@ -65,15 +91,23 @@ public class Main {
                 } else {
                     Student student = new Student(matricInput, name, department);
                     studentsList.add(student);
+                    studentListModel.addElement(student);
                     JOptionPane.showMessageDialog(frame, "Student Added Successfully", "Operation Successful", JOptionPane.INFORMATION_MESSAGE);
-                    student.Courses.add(new Course("ENT211", "Entrepreneurship and Innovation", 2, "A1"));//{"ENT211", "COS201", "MTH201", "MTH202", "COS202"};
+                    student.courses.add(new Course("ENT211", "Entrepreneurship and Innovation", 2, "A"));//{"ENT211", "COS201", "MTH201", "MTH202", "COS202"};
 
-                    student.enrollCourses();
+                    student.enrollCourses(frame);
 
                 }
             }
         });
 
+        viewCourseRegistration.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+
+            }
+        });
+    Student selected = studentListView.getSelectedValue();
 /*
 * ===============================================
 UNIVERSITY OF IBADAN - FACULTY OF COMPUTING

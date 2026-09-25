@@ -32,30 +32,39 @@ public class Student extends Person{
 
         }
     }
-    private ArrayList<Course> courses = new ArrayList<>();
+    ArrayList<Course> courses = new ArrayList<>();
 
-    public void enrollCourses(){
+    public void enrollCourses(Component parentFrame){
         System.out.print("So after checking the courses you registered for, I will say that ");
-        validateCourseRegistration();
+        validateCourseRegistration(parentFrame);
     }
-    public void calculateCGPA() {
+    public void calculateCGPA(Component parentFrame) {
         validateCourseRegistration(parentFrame);
         int totalCreditUnits = 0;
         int twgp = 0;
-        try {
-            for (Course course : courses) {
+
+        for (Course course : courses) {
+            try {
                 int wgp = course.getCreditUnit() * course.getGradePoint();//wgp means weighted grade points
                 totalCreditUnits += course.getCreditUnit();
                 twgp += wgp;//twgp means total weight grade points
             }
+            catch(IllegalArgumentException e){
+                JOptionPane.showMessageDialog(parentFrame, "Invalid Grade", course.getCourseCode() + "has an invalid grade assigned to it", JOptionPane.WARNING_MESSAGE);
+                break;
+            }
             double cgpa = twgp / totalCreditUnits;
         }
-        catch(IllegalArgumentException){
-            JOptionPane.showMessageDialog(frame, "Invalid Grade", course.getCourseCode() + "has an invalid grade assigned to it", JOptionPane.WARNING_MESSAGE);
-        }
+
+    }
+    public String getStudentId(){
+        return studentId;
     }
 
-	
+    @Override
+    public String toString() {
+        return name + " ("+ studentId + ") ";
+    }
 
 }
 

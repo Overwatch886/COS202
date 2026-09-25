@@ -15,16 +15,16 @@ public class Course{
             this.grade = grade;
         }
         else{
-            throw IllegalArgumentException("Invalid Grade");
+            throw new IllegalArgumentException("Invalid Grade");
         }
 
     }
     public boolean validateGrade(String grade){
         if (grade.equals("A")||grade.equals("B")||grade.equals("C")||grade.equals("D")||grade.equals("E")||grade.equals("F")){
-            return false;
+            return true;
         }
         else{
-            return true;
+            return false;
         }
     }
     public int getGradePoint(){
@@ -49,14 +49,14 @@ public class Course{
                 gradePoint = 0;
                 break;
             default:
-                throw IllegalArgumentException("Invalid Grade");
+                throw new IllegalArgumentException("Invalid Grade");
         }
         return gradePoint;
     }
     public int getCreditUnit(){
         return creditUnit;
     }
-    public int getCourseCode(){
+    public String getCourseCode(){
         return courseCode;
     }
 }
