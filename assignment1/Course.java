@@ -59,4 +59,10 @@ public class Course{
     public String getCourseCode(){
         return courseCode;
     }
+    public String getCourseTitle(){
+        return courseTitle;
+    }
+    public String getGrade(){
+        return grade;
+    }
 }
